@@ -1,4 +1,4 @@
-*multi-replace.txt*	summary
+*multi_replace.txt*	replacing matched pattern strings with register strings(separated by delimiter) in order
 
 Version 0.1.0
 Copyright (C) 2016 deris <deris0126@gmail.com>
@@ -28,13 +28,11 @@ CONTENTS					*multi-replace-contents*
 Introduction		|multi-replace-introduction|
 Interface		|multi-replace-interface|
   Commands		  |multi-replace-commands|
-  Functions		  |multi-replace-functions|
+  Variables		  |multi-replace-variables|
   Key Mappings		  |multi-replace-key-mappings|
 Examples		|multi-replace-examples|
 Bugs			|multi-replace-bugs|
 Changelog		|multi-replace-changelog|
-
-
 
 
 ==============================================================================
@@ -42,10 +40,14 @@ INTRODUCTION					*multi-replace-introduction*
 
 Introduction
 
-
+This is vim plugin for replacing matched pattern strings with register strings(separated by delimiter) in order.
 
 Requirements:
 - Vim 7 or later
+
+Options:
+- |operator-user| (if you want to use operator)
+<https://github.com/kana/vim-operator-user>
 
 Latest version:
 https://github.com/deris/vim-multi-replace
@@ -55,23 +57,98 @@ https://github.com/deris/vim-multi-replace
 INTERFACE					*multi-replace-interface*
 
 ------------------------------------------------------------------------------
+COMMANDS                                       *multi-replace-commands*
+
+						*MultiReplace*
+:[range]MultiReplace [options]
+	You can use this command for replacing matched pattern strings with
+	register strings in order.
+	[options] can be specified several options like following.
+		--pattern=VALUE
+			VALUE is regex pattern for replacing.
+			If this option isn't specified, it will be used
+			the last used search pattern.
+		--delim=VALUE
+			VALUE is delimiter for separating register string
+		--[no-]cycle
+			--cycle option is to replace repeatedly
+		--register=VALUE
+			VALUE is named register for replacing
+
+------------------------------------------------------------------------------
+VARIABLES                                       *multi-replace-variables*
+
+g:multi_replace_delim_pattern   (default: "\n")
+	default delimiter pattern for replacing.
+
+g:multi_replace_cycle_replace   (default: 0)
+	default cycle option.
+
+------------------------------------------------------------------------------
 MAPPINGS					*multi-replace-mappings*
 
-<Plug>(multi-replace-hoge)				*<Plug>(multi-replace-hoge)*
-			These mappings are defined in Normal mode, Visual mode
-			and Operator-pending mode.
+<Plug>(operator-multi-replace)			*<Plug>(oprator-multi-replace)*
+	These mappings are defined in Normal mode, Visual mode
+	and Operator-pending mode.
+	Same as :'<,'>MultiReplace
+	If you want to use these mappings, you need to install
+	vim-operator-user<https://github.com/kana/vim-operator-user>.
+
+<Plug>(operator-multi-replace-cycle)		*<Plug>(oprator-multi-replace-cycle)*
+	These mappings are defined in Normal mode, Visual mode
+	and Operator-pending mode.
+	Same as :'<,'>MultiReplace --cycle
+	If you want to use these mappings, you need to install
+	vim-operator-user<https://github.com/kana/vim-operator-user>.
 
 
 ==============================================================================
 EXAMPLES					*multi-replace-examples*
 
-	map <Space><Space> <Plug>(multi-replace-hoge)
+" Select text linewise and you can use following command
+" for replacing matched pattern strings with register strings
+" (separated by delimiter) in order.
+
+" Replace matched pattern strings with register strings use default
+" settings(ref. global variables).
+:'<,'>MultiReplace
+" Same as above, but the difference is to use cycle option
+:'<,'>MultiReplace --cycle
+" Same as the first one, but the difference is to specify delimiter to ','
+:'<,'>MultiReplace --delim=,
+" Same as the first one, but the difference is to use named register 'a'
+:'<,'>MultiReplace --register=a
+" Same as the first one, but the difference is to use pattern '$'
+:'<,'>MultiReplace --pattern=$
+" Same as :'<,'>MultiReplace
+:'<,'>MultiReplace --no-cycle --delim=\n --register='"'
+
+" If you want to customize default settings,
+" you can change following gloval variable.
+
+" Following settings is default value.
+" default delimiter
+let g:multi_replace_delim_pattern = "\n"
+" default cycle option
+let g:multi_replace_cycle_replace = 0
+
+" This operator like :'<,'>MultiReplace (use default options).
+map <Leader>r <Plug>(operator-multi-replace)
+" This operator like :'<,'>MultiReplace --cycle
+map <Leader>R <Plug>(operator-multi-replace-cycle)
+
+
+==============================================================================
+BUGS						*multi-replace-bugs*
+
+- Currently, there is no known issue.
 
 
 ==============================================================================
 CHANGELOG					*multi-replace-changelog*
 
-
+0.1.0	2016-05-02
+- First Version.
 
 
 ==============================================================================
