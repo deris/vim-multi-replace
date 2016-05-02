@@ -1,4 +1,4 @@
-" multi-replace - replacing match pattern strings with register strings(separated by delim) in order
+" multi-replace - replacing matched pattern strings with register strings(separated by delimiter) in order
 " Version: 0.1.0
 " Copyright (C) 2016 deris0126
 " License: MIT license  {{{

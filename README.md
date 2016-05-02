@@ -1,16 +1,16 @@
 multi-replace
 ===
 
-vim plugin for replacing match pattern strings with register strings(separated by delim) in order.
+This is vim plugin for replacing matched pattern strings with register strings(separated by delimiter) in order.
 
 Screenshot
 ---
 
-### Replace match pattern strings with register strings(separated by delimiter "\n")
+### Replace matched pattern strings with register strings(separated by delimiter "\n")
 
 ![screenshot1](https://raw.githubusercontent.com/deris/s/master/vim-multi-replace/vim-multi-replace_01_replace.gif)
 
-### Same as above but using cycle option
+### Same as above, but the difference is to use cycle option
 
 ![screenshot2](https://raw.githubusercontent.com/deris/s/master/vim-multi-replace/vim-multi-replace_02_replace_cycle.gif)
 
@@ -20,19 +20,19 @@ Usage
 ### Commands
 ```vim
 " Select text linewise and you can use following command
-" for replacing match pattern strings with register strings(separated by delim) in order.
+" for replacing matched pattern strings with register strings(separated by delimiter) in order.
 
-" Replace match pattern strings with register strings use default settings(ref. global variables).
+" Replace matched pattern strings with register strings use default settings(ref. global variables).
 :'<,'>MultiReplace
-" Same as above but using cycle option
+" Same as above, but the difference is to use cycle option
 :'<,'>MultiReplace --cycle
-" Same as first but delimiter is ','
+" Same as the first one, but the difference is to specify delimiter to ','
 :'<,'>MultiReplace --delim=,
-" Same as first but use named register 'a'
+" Same as the first one, but the difference is to use named register 'a'
 :'<,'>MultiReplace --register=a
-" Same as first but use specified pattern '$'
+" Same as the first one, but the difference is to use pattern '$'
 :'<,'>MultiReplace --pattern=$
-" Same as :'<,'>MultiReplace (there are no options)
+" Same as :'<,'>MultiReplace
 :'<,'>MultiReplace --no-cycle --delim=\n --register='"'
 ```
 
